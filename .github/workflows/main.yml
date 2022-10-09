@@ -1,0 +1,25 @@
+name: PayPay
+
+on:
+  repository_dispatch:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.8'
+        
+      - name: Install Package
+        run: pip install -r requirements.txt
+          
+      - name: Run Python
+        env:
+          NAME: ${{ secrets.NAME }}
+          PW: ${{ secrets.PW }}
+          TZ: "Asia/Tokyo"
+        run: python app.py
