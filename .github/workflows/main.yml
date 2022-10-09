@@ -21,5 +21,6 @@ jobs:
         env:
           NAME: ${{ secrets.NAME }}
           PW: ${{ secrets.PW }}
+          ADDRESS: ${{ secrets.ADDRESS }}
           TZ: "Asia/Tokyo"
         run: python app.py
