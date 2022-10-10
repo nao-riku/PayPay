@@ -35,7 +35,7 @@ def loop(bal):
       bal = bal2
       r = requests.get(os.environ['URL'], params={"p": bal})
       print(bal)
-    time.sleep(5)
+    time.sleep(10)
     if datetime.datetime.now() < end:
       loop(bal)
     else:
@@ -85,7 +85,7 @@ finally:
   bal = element.text
   r = requests.get(os.environ['URL'], params={"p": bal})
   print(bal)
-  time.sleep(5)
+  time.sleep(10)
   loop(bal)
   
   
