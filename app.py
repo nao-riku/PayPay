@@ -88,7 +88,7 @@ finally:
   r = requests.get(os.environ['URL'], params={"p": bal})
   print(bal)
   time.sleep(10)
-  loop(bal)
+  main(bal)
   
   
 
