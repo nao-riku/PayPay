@@ -26,6 +26,8 @@ def loop(bal):
     html = driver.page_source
     time.sleep(2)
     print(html)
+    time.sleep(60)
+    loop(bal)
   else:
     element = driver.find_elements(By.CLASS_NAME, "balDetail__number")[1]
     bal2 = element.text
