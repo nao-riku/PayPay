@@ -76,6 +76,7 @@ except:
 finally:
   bal = element.text
   r = requests.get(os.environ['URL'], params={"p": bal})
+  print(r.text)
   print(bal)
   time.sleep(5)
   loop(bal)
