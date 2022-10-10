@@ -8,7 +8,7 @@ import requests
 import datetime
 import time
 
-n = datetime.datetime.now() + datetime.timedelta(hours=4)
+n = datetime.datetime.now() + datetime.timedelta(minutes=2)
 end = datetime.datetime(n.year, n.month, n.day, n.hour, 0, 0)
 
 options = webdriver.ChromeOptions()
@@ -18,6 +18,7 @@ options.add_argument('--disable-dev-shm-usage')
 driver = webdriver.Chrome('chromedriver',options=options)
 
 def loop(bal):
+  global driver
   driver.refresh()
   wait = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, "balDetail__number")))
   element = driver.find_elements(By.CLASS_NAME, "balDetail__number")[1]
