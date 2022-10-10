@@ -20,18 +20,24 @@ driver = webdriver.Chrome('chromedriver',options=options)
 def loop(bal):
   global driver
   driver.refresh()
-  wait = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, "balDetail__number")))
-  element = driver.find_elements(By.CLASS_NAME, "balDetail__number")[1]
-  bal2 = element.text
-  if bal != bal2:
-    bal = bal2
-    r = requests.get(os.environ['URL'], params={"p": bal})
-    print(bal)
-  time.sleep(5)
-  if datetime.datetime.now() < end:
-    loop(bal)
+  try:
+    wait = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, "balDetail__number")))
+  except:
+    html = driver.page_source
+    time.sleep(2)
+    print(html)
   else:
-    driver.quit()
+    element = driver.find_elements(By.CLASS_NAME, "balDetail__number")[1]
+    bal2 = element.text
+    if bal != bal2:
+      bal = bal2
+      r = requests.get(os.environ['URL'], params={"p": bal})
+      print(bal)
+    time.sleep(5)
+    if datetime.datetime.now() < end:
+      loop(bal)
+    else:
+      driver.quit()
 
 driver.get('https://paypay.yahoo.co.jp/balance')
 
