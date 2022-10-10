@@ -4,7 +4,12 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+import requests
+import datetime
 import time
+
+n = datetime.datetime.now() + datetime.timedelta(hours=4)
+end = datetime.datetime(n.year, n.month, n.day, n.hour, 0, 0)
 
 options = webdriver.ChromeOptions()
 options.add_argument('--headless')
@@ -53,8 +58,25 @@ except:
   
 finally:
   bal = element.text
+  r = requests.get(os.environ['URL'], params={"p": bal})
+  print(bal)
+  time.sleep(5)
+  loop(bal)
   
+def loop(bal):
   driver.refresh()
+  wait = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, "balDetail__number")))
+  element = driver.find_element(By.CLASS_NAME, "balDetail__number")
+  bal2 = element.text
+  if bal != bal2:
+    bal = bal2
+    r = requests.get(os.environ['URL'], params={"p": bal})
+    print(bal)
+  time.sleep(5)
+  if datetime.datetime.now() < end:
+    loop(bal)
+  else:
+    driver.quit()
+  
 
-print(element.text)
 
