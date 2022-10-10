@@ -16,6 +16,22 @@ options.add_argument('--headless')
 options.add_argument('--no-sandbox')
 options.add_argument('--disable-dev-shm-usage')
 driver = webdriver.Chrome('chromedriver',options=options)
+
+def loop(bal):
+  driver.refresh()
+  wait = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, "balDetail__number")))
+  element = driver.find_elements(By.CLASS_NAME, "balDetail__number")[1]
+  bal2 = element.text
+  if bal != bal2:
+    bal = bal2
+    r = requests.get(os.environ['URL'], params={"p": bal})
+    print(bal)
+  time.sleep(5)
+  if datetime.datetime.now() < end:
+    loop(bal)
+  else:
+    driver.quit()
+
 driver.get('https://paypay.yahoo.co.jp/balance')
 
 wait = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.NAME, "login")))
@@ -37,7 +53,7 @@ time.sleep(1)
 
 try:
   wait = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, "balDetail__number")))
-  element = driver.find_element(By.CLASS_NAME, "balDetail__number")
+  element = driver.find_elements(By.CLASS_NAME, "balDetail__number")[1]
 
 except:
   element = driver.find_elements(By.NAME, "selectedQtype")[2]
@@ -54,7 +70,7 @@ except:
   time.sleep(1)
 
   wait = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, "balDetail__number")))
-  element = driver.find_element(By.CLASS_NAME, "balDetail__number")
+  element = driver.find_elements(By.CLASS_NAME, "balDetail__number")[1]
   
 finally:
   bal = element.text
@@ -63,20 +79,6 @@ finally:
   time.sleep(5)
   loop(bal)
   
-def loop(bal):
-  driver.refresh()
-  wait = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, "balDetail__number")))
-  element = driver.find_element(By.CLASS_NAME, "balDetail__number")
-  bal2 = element.text
-  if bal != bal2:
-    bal = bal2
-    r = requests.get(os.environ['URL'], params={"p": bal})
-    print(bal)
-  time.sleep(5)
-  if datetime.datetime.now() < end:
-    loop(bal)
-  else:
-    driver.quit()
   
 
 
