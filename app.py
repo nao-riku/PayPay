@@ -4,13 +4,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from pyzaim import ZaimAPI
 import time
-
-CK = os.environ['CK']
-CS = os.environ['CS']
-AT = os.environ['AT']
-AS = os.environ['AS']
 
 options = webdriver.ChromeOptions()
 options.add_argument('--headless')
@@ -56,7 +50,11 @@ except:
 
   wait = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, "balDetail__number")))
   element = driver.find_element(By.CLASS_NAME, "balDetail__number")
+  
+finally:
+  bal = element.text
+  
+  driver.refresh()
 
 print(element.text)
 
-api = ZaimAPI(CK, CS, AT, AS, 'verifier')
