@@ -22,5 +22,6 @@ jobs:
           NAME: ${{ secrets.NAME }}
           PW: ${{ secrets.PW }}
           ADDRESS: ${{ secrets.ADDRESS }}
+          URL: ${{ secrets.URL }}
           TZ: "Asia/Tokyo"
         run: python app.py
