@@ -17,6 +17,14 @@ options.add_argument('--no-sandbox')
 options.add_argument('--disable-dev-shm-usage')
 driver = webdriver.Chrome('chromedriver',options=options)
 
+def main(bal):
+    while True:
+      time.sleep(10)
+      if datetime.datetime.now() > end:
+        driver.quit()
+        break
+      loop(bal)
+
 def loop(bal):
   global driver
   driver.refresh()
@@ -27,7 +35,6 @@ def loop(bal):
     time.sleep(2)
     print(html)
     time.sleep(60)
-    loop(bal)
   else:
     element = driver.find_elements(By.CLASS_NAME, "balDetail__number")[1]
     bal2 = element.text
@@ -35,11 +42,6 @@ def loop(bal):
       bal = bal2
       r = requests.get(os.environ['URL'], params={"p": bal})
       print(bal)
-    time.sleep(10)
-    if datetime.datetime.now() < end:
-      loop(bal)
-    else:
-      driver.quit()
 
 driver.get('https://paypay.yahoo.co.jp/balance')
 
