@@ -37,8 +37,8 @@ element.click()
 time.sleep(1)
 
 try:
-  wait = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, "balTotal__number")))
-  element = driver.find_element(By.CLASS_NAME, "balTotal__number")
+  wait = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, "balDetail__number")))
+  element = driver.find_element(By.CLASS_NAME, "balDetail__number")
 
 except:
   element = driver.find_elements(By.NAME, "selectedQtype")[2]
@@ -54,8 +54,8 @@ except:
   element.click()
   time.sleep(1)
 
-  wait = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, "balTotal__number")))
-  element = driver.find_element(By.CLASS_NAME, "balTotal__number")
+  wait = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, "balDetail__number")))
+  element = driver.find_element(By.CLASS_NAME, "balDetail__number")
 
 print(element.text)
 
