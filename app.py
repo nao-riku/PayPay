@@ -37,7 +37,7 @@ def loop(bal):
     time.sleep(60)
   else:
     element = driver.find_elements(By.CLASS_NAME, "balDetail__number")[1]
-    bal2 = element.text
+    bal2 = element.text.replace(',', '')
     if bal != bal2:
       bal = bal2
       r = requests.get(os.environ['URL'], params={"p": bal})
