@@ -84,7 +84,7 @@ except:
   element = driver.find_elements(By.CLASS_NAME, "balDetail__number")[1]
   
 finally:
-  bal = element.text
+  bal = element.text.replace(',', '')
   r = requests.get(os.environ['URL'], params={"p": bal})
   print(bal)
   time.sleep(10)
