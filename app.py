@@ -45,7 +45,7 @@ def loop(bal):
 
 driver.get('https://paypay.yahoo.co.jp/balance')
 
-wait = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.NAME, "login")))
+wait = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.TAG_NAME, "input")))
 element = driver.find_element(By.NAME, "login")
 element.send_keys(os.environ['NAME'])
 time.sleep(1)
