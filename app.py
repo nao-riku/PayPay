@@ -29,7 +29,7 @@ def loop(bal):
   global driver
   driver.refresh()
   try:
-    wait = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, "balDetail__number")))
+    wait = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.CLASS_NAME, "balDetail__number")))
   except:
     html = driver.page_source
     time.sleep(2)
@@ -45,7 +45,7 @@ def loop(bal):
 
 driver.get('https://paypay.yahoo.co.jp/balance')
 
-wait = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.NAME, "login")))
+wait = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.NAME, "login")))
 element = driver.find_element(By.NAME, "login")
 element.send_keys(os.environ['NAME'])
 time.sleep(1)
@@ -63,7 +63,7 @@ element.click()
 time.sleep(1)
 
 try:
-  wait = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, "balDetail__number")))
+  wait = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.CLASS_NAME, "balDetail__number")))
   element = driver.find_elements(By.CLASS_NAME, "balDetail__number")[1]
 
 except:
@@ -80,7 +80,7 @@ except:
   element.click()
   time.sleep(1)
 
-  wait = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, "balDetail__number")))
+  wait = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.CLASS_NAME, "balDetail__number")))
   element = driver.find_elements(By.CLASS_NAME, "balDetail__number")[1]
   
 finally:
