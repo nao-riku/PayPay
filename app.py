@@ -46,19 +46,19 @@ def loop(bal):
 driver.get('https://paypay.yahoo.co.jp/balance')
 
 wait = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.TAG_NAME, "input")))
-element = driver.find_element(By.NAME, "login")
+element = driver.find_element(By.TAG_NAME, "input")
 element.send_keys(os.environ['NAME'])
 time.sleep(1)
 
-element = driver.find_element(By.NAME, "btnNext")
+element = driver.find_element(By.CSS_SELECTOR, ".ar-button_fullwidth_19rcY")
 element.click()
 time.sleep(1)
 
-element = driver.find_element(By.NAME, "passwd")
+element = driver.find_element(By.NAME, "password")
 element.send_keys(os.environ['PW'])
 time.sleep(1)
 
-element = driver.find_element(By.NAME, "btnSubmit")
+element = driver.find_element(By.CLASS_NAME, "login")
 element.click()
 time.sleep(1)
 
